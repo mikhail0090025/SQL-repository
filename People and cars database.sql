@@ -2,9 +2,9 @@ CREATE DATABASE IF NOT EXISTS MyDB;
 USE MyDB;
 DROP TABLE IF EXISTS Person;
 DROP TABLE IF EXISTS Car;
-CREATE TABLE Car(id INT PRIMARY KEY, Year SMALLINT, color ENUM('Red', 'Green', 'Black', 'White', 'Yellow', 'Blue'));
+CREATE TABLE Car(id INT PRIMARY KEY, YearProduced SMALLINT, color ENUM('Red', 'Green', 'Black', 'White', 'Yellow', 'Blue'));
 CREATE TABLE Person(id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(20), surname VARCHAR(30), birthday DATETIME, car_id INT UNIQUE, FOREIGN KEY(car_id) REFERENCES Car(id));
-INSERT INTO Car (id, Year, color) VALUES
+INSERT INTO Car (id, YearProduced, color) VALUES
     (1, 2010, 'Red'),
     (2, 2011, 'Green'),
     (3, 2012, 'Black'),
@@ -48,3 +48,10 @@ INSERT INTO Person (name, surname, birthday, car_id) VALUES
     ('Peter', 'Ward', '1991-05-23', 19),
     ('Quinn', 'Fisher', '1989-08-14', 20),
     ('Rachel', 'Perry', '1984-11-26', 21);
+SELECT UPPER(CONCAT(name, " ", surname)) AS Name,
+DATE_FORMAT(birthday, '%y.%m.%d') AS Birthday,
+Car.YearProduced AS YEAR_PRODUCED
+FROM Person
+JOIN Car ON car_id = Car.id
+WHERE birthday > '1990-00-00'
+ORDER BY Person.birthday
