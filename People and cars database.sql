@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS MyDB;
 USE MyDB;
 DROP TABLE IF EXISTS Person;
 DROP TABLE IF EXISTS Car;
-CREATE TABLE Car(id INT PRIMARY KEY, YearProduced SMALLINT, color ENUM('Red', 'Green', 'Black', 'White', 'Yellow', 'Blue'));
+CREATE TABLE Car(id INT PRIMARY KEY, YearProduced SMALLINT, color ENUM('Red', 'Green', 'Black', 'White', 'Yellow', 'Blue', 'Silver', 'Orange', 'Purple', 'Gray', 'Brown', 'Pink', 'Cyan', 'Magenta', 'Turquoise', 'Lime', 'Indigo', 'Violet', 'Beige', 'Maroon'));
 CREATE TABLE Person(id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(20), surname VARCHAR(30), birthday DATETIME, car_id INT UNIQUE, FOREIGN KEY(car_id) REFERENCES Car(id));
 INSERT INTO Car (id, YearProduced, color) VALUES
     (1, 2010, 'Red'),
@@ -25,7 +25,56 @@ INSERT INTO Car (id, YearProduced, color) VALUES
     (18,2027, 'Blue'),
     (19,2028, 'Red'),
     (20,2029, 'Green'),
-    (21,2030, 'Black');
+    (21,2030, 'Black'),
+    (22, 2030, 'Black'),
+  (23, 2031, 'Red'),
+  (24, 2029, 'Blue'),
+  (25, 2032, 'Silver'),
+  (26, 2028, 'White'),
+  (27, 2033, 'Green'),
+  (28, 2027, 'Yellow'),
+  (29, 2034, 'Orange'),
+  (30, 2026, 'Purple'),
+  (31, 2035, 'Gray'),
+  (32, 2025, 'Brown'),
+  (33, 2036, 'Pink'),
+  (34, 2024, 'Cyan'),
+  (35, 2037, 'Magenta'),
+  (36, 2023, 'Turquoise'),
+  (37, 2038, 'Lime'),
+  (38, 2022, 'Indigo'),
+  (39, 2039, 'Violet'),
+  (40, 2021, 'Beige'),
+  (41, 2040, 'Maroon'),
+  (42, 2005, 'Gray'),
+  (43, 2008, 'Silver'),
+  (44, 1965, 'Red'),
+  (45, 1972, 'Blue'),
+  (46, 1985, 'Green'),
+  (47, 1998, 'Black'),
+  (48, 1969, 'White'),
+  (49, 2002, 'Yellow'),
+  (50, 1978, 'Orange'),
+  (51, 1989, 'Purple'),
+  (52, 1995, 'Brown'),
+  (53, 1971, 'Pink'),
+  (54, 1980, 'Cyan'),
+  (55, 2007, 'Magenta'),
+  (56, 1963, 'Turquoise'),
+  (57, 1992, 'Lime'),
+  (58, 2004, 'Indigo'),
+  (59, 1967, 'Violet'),
+  (60, 1990, 'Beige'),
+  (61, 1976, 'Maroon'),
+  (62, 1973, 'Gray'),
+  (63, 1987, 'Silver'),
+  (64, 2001, 'Red'),
+  (65, 1979, 'Blue'),
+  (66, 1997, 'Green'),
+  (67, 1964, 'Black'),
+  (68, 2009, 'White'),
+  (69, 1975, 'Yellow'),
+  (70, 1982, 'Orange');
 INSERT INTO Person (name, surname, birthday, car_id) VALUES
     ('John', 'Doe', '1990-01-15', 1),
     ('Jane', 'Smith', '1985-04-22', 2),
@@ -48,16 +97,50 @@ INSERT INTO Person (name, surname, birthday, car_id) VALUES
     ('Peter', 'Ward', '1991-05-23', 19),
     ('Quinn', 'Fisher', '1989-08-14', 20),
     ('Rachel', 'Perry', '1984-11-26', 21),
-    ('Ivan', 'Mazepa', '1980-07-12', NULL);
+    ('Ivan', 'Mazepa', '1980-07-12', NULL),
+    ('Monica', 'Geller', '1980-07-15', 22),
+    ('Chandler', 'Bing', '1969-04-08', NULL),
+    ('Ross', 'Geller', '1967-10-18', 23),
+    ('Phoebe', 'Buffay', '1965-02-16', 24),
+    ('Joey', 'Tribbiani', '1967-07-30', NULL),
+    ('Janice', 'Hosenstein', '1971-04-04', 25),
+    ('Gunther', 'Unknown', '1982-12-01', 26),
+    ('Emily', 'Waltham', '1974-11-14', 27),
+    ('Richard', 'Burke', '1948-06-03', 28),
+    ('Estelle', 'Leonard', '1938-09-22', NULL),
+    ('Mike', 'Hannigan', '1966-05-20', 29),
+    ('Carol', 'Willick', '1964-02-24', 30),
+    ('Susan', 'Bunch', '1962-03-15', NULL),
+    ('David', 'Crane', '1957-08-23', 31),
+    ('Judy', 'Geller', '1944-12-05', 32),
+    ('Barry', 'Farber', '1968-09-12', NULL),
+    ('Amy', 'Green', '1972-01-05', 33),
+    ('Frank', 'Buffay Jr.', '1970-11-17', 34),
+    ('Charlie', 'Wheeler', '1978-05-14', NULL),
+    ('Gary', 'Oldman', '1958-03-21', 35),
+    ('Sandra', 'Green', '1942-11-15', 36),
+    ('Leslie', 'Buffay', '1960-07-28', 37),
+    ('Jack', 'Bing', '1941-12-02', 38),
+    ('Jill', 'Green', '1940-09-28', NULL),
+    ('Mark', 'Robinson', '1963-06-04', 39),
+    ('Mona', 'Unknown', '1955-01-11', 40),
+    ('Paolo', 'Unknown', '1969-08-06', NULL),
+    ('Eddie', 'Unknown', '1964-11-01', 41),
+    ('Pete', 'Becker', '1970-03-25', 42),
+    ('Erica', 'Unknown', '1989-03-15', NULL);
 SELECT 
 Person.id AS ID,
 UPPER(CONCAT(name, " ", surname)) AS Name,
-DATE_FORMAT(birthday, '%y.%m.%d') AS Birthday,
+DATE_FORMAT(birthday, '%y.%m.%d, %h:%i:%s') AS Birthday,
 Car.YearProduced AS His_car_year_production,
 Car.color AS Cars_color,
-UPPER(LEFT(name, 1)) = 'G' AS Name_starts_from_G
+CASE
+WHEN UPPER(LEFT(name, 1)) = 'J' THEN 'TRUE'
+ELSE 'FALSE'
+END AS Name_starts_from_J
 FROM Person
-LEFT JOIN Car ON car_id = Car.id -- Shows even people who dont have car
-JOIN Car ON car_id = Car.id -- Shows only people who have car
+-- LEFT JOIN Car ON car_id = Car.id -- Shows even people who dont have car
+-- INNER JOIN Car ON car_id = Car.id -- Shows only people who have car
+CROSS JOIN Car
 -- WHERE birthday > '1984-00-00'
 ORDER BY Person.id
