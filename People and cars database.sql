@@ -128,16 +128,17 @@ INSERT INTO Person (name, surname, birthday, car_id) VALUES
     ('Eddie', 'Unknown', '1964-11-01', 41),
     ('Pete', 'Becker', '1970-03-25', 42),
     ('Erica', 'Unknown', '1989-03-15', NULL);
-SELECT 
-Person.id AS ID,
-UPPER(CONCAT(name, " ", surname)) AS Name,
-DATE_FORMAT(birthday, '%y.%m.%d, %h:%i:%s') AS Birthday,
-Car.YearProduced AS His_car_year_production,
-Car.color AS Cars_color,
+SELECT
+Person.id AS 'ID',
+UPPER(CONCAT(name, " ", surname)) AS 'Name',
+DATE_FORMAT(birthday, '%y.%m.%d, %h:%i:%s') AS 'Birthday',
+Car.YearProduced AS 'Cars year production',
+Car.color AS 'Car color',
 CASE
 WHEN UPPER(LEFT(name, 1)) = 'J' THEN 'TRUE'
 ELSE 'FALSE'
-END AS Name_starts_from_J
+END AS 'Name starts from letter J',
+Car.YearProduced - (SELECT AVG(YearProduced) FROM Car) AS 'More than average year'
 FROM Person
 -- LEFT JOIN Car ON car_id = Car.id -- Shows even people who dont have car
 -- INNER JOIN Car ON car_id = Car.id -- Shows only people who have car
